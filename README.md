@@ -8,3 +8,5 @@ The analysis sequence is similar in structure to the sequence in MRI_T1rho_T2sta
 There are two analyzes:  1. Using the entire segmented meniscus (mri_m_fit.m) and 2. Using the segmented meniscus with the top and bottom pixels removed (eroded) (mri_em_fit.m).
 
 Please see the header comments in the M-files.
+
+Note that the data must be in particular directories.
