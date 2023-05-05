@@ -353,7 +353,7 @@ for ks = 1:nsubj
 % Plot Results
 %
       sid = ['Subject ' subjnam ', ' ltxt ' Leg, T2*'];
-      cmprt_plt4m(v,mask,rsls,nrsls,idt,tcp,nps,mxts,cmap,bbox,sid, ...
+      cmprt_plt4m(v,mask,rsls,nrsls,idt,tcp,nps,mxts,cmap,boxs,sid, ...
                   psnamf);
 %
 % Get Statistics on Pixel Results

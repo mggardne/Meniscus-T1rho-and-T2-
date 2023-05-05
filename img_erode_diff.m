@@ -1,7 +1,7 @@
 %
 % Get Subject Directory
 %
-sdir = 'PTOA 012-JH';   % Subject directory
+sdir = '012-JH';        % Subject directory
 %
 % Load Masks
 %

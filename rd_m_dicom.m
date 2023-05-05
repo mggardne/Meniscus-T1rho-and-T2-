@@ -82,7 +82,7 @@ for k = 1:nr
    sltm{k} = eval(['[' spltr{k} ']'])';
    nslt = size(sltm{k},1);
    if nslt~=4
-     error(' *** rd_dicom:  Incorrect number of spin lock times!');
+     error(' *** rd_m_dicom:  Incorrect number of spin lock times!');
    end
 end
 %
@@ -328,7 +328,7 @@ idse = find(idds==-1);
 ns = length(idss);
 nse = length(idse);
 if ns~=nse
-  error([' *** ERROR in rd_dicom:  Number of starting and ending', ...
+  error([' *** ERROR in rd_m_dicom:  Number of starting and ending', ...
          ' indices for sets of T2* series are not equal!']);
 end
 %
@@ -365,14 +365,15 @@ for k = 1:ns
    if any(k==idd)                      % Correct duplicates
      [e,ide] = unique(e,'last');       % Get last duplicates
      if size(e,1)~=netmin
-       error(' *** rd_dicom:  Number of echo times are not the same!');
+       error([' *** rd_m_dicom:  Number of echo times are not the', ...
+              ' same!']);
      end
      idsx = idsx(ide);  % Correct series index
    end
 %
    [~,idsrt] = sort(e);
    if all(idsrt~=(1:netmin)')
-     error(' *** rd_dicom:  Echo times are not in order!');
+     error(' *** rd_m_dicom:  Echo times are not in order!');
    end
 %
    if any(k==idd)                      % Warn about duplicates
