@@ -51,21 +51,25 @@ fun = @exp_fun1;        % Exponential function
 init = 1;               % Use fixed starting parameters
 tr0 = 65;               % Initial T1rho estimate in ms
 % tr0 = 80;               % Initial T1rho estimate in ms
-trmx = 100;             % Maximum valid T1rho result
+trmx = 50;              % Maximum valid T1rho result
+% trmx = 100;             % Maximum valid T1rho result
 trmn = 0;               % Minimum valid T1rho result
 ts0 = 35;               % Initial T2* estimate in ms
-tsmx = 100;             % Maximum valid T2* result
+tsmx = 50;              % Maximum valid T2* result
+% tsmx = 100;             % Maximum valid T2* result
 tsmn = 0;               % Minimum valid T2* result
 %
-mxtr = 60;              % Maximum scale on T1rho plots
-mxts = 55;              % Maximum scale on T2* plots
+mxtr = 50;              % Maximum scale on T1rho plots
+mxts = 50;              % Maximum scale on T2* plots
+% mxtr = 60;              % Maximum scale on T1rho plots
+% mxts = 55;              % Maximum scale on T2* plots
 %
 % Output Directory, Output Files and Output Labels
 %
 resdir = fullfile('Results');          % Results directory
 %
 ifirst = true;          % First write to file
-xlsnam = 'mri_m_fit.xlsx';             % Results spreadsheet
+xlsnam = 'mri_m_fit50.xlsx';           % Results spreadsheet
 xlsnam = fullfile(resdir,xlsnam);      % Include output directory
 hdrs1 = {'Subject' 'Result' 'Leg' 'Comprt' 'AP'};
 hdrs2 = {'Pixels' 'T1R/T2S' 'RSS' 'ValidPix' 'Mean' 'Min' 'Max' ...
@@ -210,6 +214,7 @@ for ks = 1:nsubj
 %   Index 3 - Compartment - 1 = lateral and 2 = medial
 %   Index 4 - AP - 1 = anterior and 2 = posterior
 %
+%       tcp50 = cell(na,1);
       for ka = 1:na
          t1r_res(ks,ileg+1,id(ka,1)+1,id(ka,2)+1) = tc(ka);
          t1r_npx(ks,ileg+1,id(ka,1)+1,id(ka,2)+1) = npx(ka);
@@ -217,13 +222,21 @@ for ks = 1:nsubj
          t1r_respx{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = tcp{ka};
          t1r_rsspx{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = rssp{ka};
          t1r_nps{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = nps{ka};
+%
+%          tcp1 = tcp{ka};
+%          idx = tcp1>trmx;
+%          tcp1(idx) = NaN;
+%          tcp50{ka} = tcp1;
+%
       end
+%
+%       clear idx tcp1;
 %
 % Plot Results
 %
       sid = ['Subject ' sdir ', ' ltxt ' Leg, T1\rho'];
-      cmprt_plt4m(v,mask,rsls,nrsls,idt,tcp,nps,mxtr,cmap,bbox,sid, ...
-                  psnamf);
+      cmprt_plt4m50(v,mask,rsls,nrsls,idt,tcp,nps,mxtr,cmap,bbox, ...
+                  sid,psnamf);
 %
 % Get Statistics on Pixel Results
 %
@@ -252,11 +265,11 @@ for ks = 1:nsubj
 %
       ids = [subj ires ileg];          % MAT file identifiers
       ids = repmat(ids,na,1);
-      ids = [ids id];                  % All identifiers
+      idsa = [ids id];                 % All identifiers
 %
 % Create and Write Table of Results
 %
-      t1 = array2table(ids,'VariableNames',hdrs1);
+      t1 = array2table(idsa,'VariableNames',hdrs1);
       t2 = table(npx,tc,rss,npxv,tcpm,tcpmn,tcpmx,tcpsd,tcpcov, ...
                  'VariableNames',hdrs2);
       t = [t1 t2];
@@ -362,6 +375,7 @@ for ks = 1:nsubj
 %   Index 3 - Compartment - 1 = lateral and 2 = medial
 %   Index 4 - AP - 1 = anterior and 2 = posterior
 %
+%       tcp50 = cell(na,1);
       for ka = 1:na
          t2s_res(ks,ileg+1,id(ka,1)+1,id(ka,2)+1) = tc(ka);
          t2s_npx(ks,ileg+1,id(ka,1)+1,id(ka,2)+1) = npx(ka);
@@ -369,13 +383,21 @@ for ks = 1:nsubj
          t2s_respx{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = tcp{ka};
          t2s_rsspx{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = rssp{ka};
          t2s_nps{ks,ileg+1,id(ka,1)+1,id(ka,2)+1} = nps{ka};
+%
+%          tcp1 = tcp{ka};
+%          idx = tcp1>tsmx;
+%          tcp1(idx) = NaN;
+%          tcp50{ka} = tcp1;
+%
       end
+%
+%       clear idx tcp1;
 %
 % Plot Results
 %
       sid = ['Subject ' sdir ', ' ltxt ' Leg, T2*'];
-      cmprt_plt4m(v,mask,rsls,nrsls,idt,tcp,nps,mxts,cmap,bbox,sid, ...
-                  psnamf);
+      cmprt_plt4m50(v,mask,rsls,nrsls,idt,tcp,nps,mxts,cmap,bbox, ...
+                  sid,psnamf);
 %
 % Get Statistics on Pixel Results
 %
@@ -404,11 +426,11 @@ for ks = 1:nsubj
 %
       ids = [subj ires ileg];          % MAT file identifiers
       ids = repmat(ids,na,1);
-      ids = [ids id];                  % All identifiers
+      idsa = [ids id];                 % All identifiers
 %
 % Create and Write Table of Results
 %
-      t1 = array2table(ids,'VariableNames',hdrs1);
+      t1 = array2table(idsa,'VariableNames',hdrs1);
       t2 = table(npx,tc,rss,npxv,tcpm,tcpmn,tcpmx,tcpsd,tcpcov, ...
                  'VariableNames',hdrs2);
       t = [t1 t2];
