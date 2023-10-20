@@ -1,19 +1,20 @@
 %#######################################################################
 %
-%                  * MRI Meniscus Erode FIT Program *
+%                 * MRI Meniscus Erode FIT 65 Program *
 %
 %          M-File which reads the registered MRI data and segmentation 
-%     MAT files and fits a monoexponential to the MRI data as a function
-%     of spin lock or echo times.  T1rho or T2* are the time constants
-%     of the fits.  The masks are eroded by one pixel on the boundary
-%     using a cross, and square structural elements.  These masks are
-%     used to get T1rho and T2* over the smaller areas.  Resulting
-%     T1rho and T2* values and summary statistics are written to the
-%     MS-Excel spreadsheets, mri_me_fit_no.xlsx, mri_me_fit_ec.xlsx,
-%     and mri_me_fit_es.xlsx, in the "Results" directory.
+%     MAT files fir subject 065 and fits a monoexponential to the MRI
+%     data as a function of spin lock or echo times.  T1rho or T2* are
+%     the time constants of the fits.  The masks are eroded by one pixel
+%     on the boundary using a cross, and square structural elements.
+%     These masks are used to get T1rho and T2* over the smaller areas.
+%     Resulting T1rho and T2* values and summary statistics are written
+%     to the MS-Excel spreadsheets, mri_me_fit65_no.xlsx,
+%     mri_me_fit65_ec.xlsx, and mri_me_fit65_es.xlsx, in the
+%     "Results" directory.
 %
-%     NOTES:  1.  Data MAT files must be in subject directories 
-%             "..\PTOA\0*" where "*" is the subject number.
+%     NOTES:  1.  Data MAT files must be in subject directory
+%             "..\PTOA\065".
 %
 %             2.  T1rho MAT files must start with "T1rho_S" and T2* MAT
 %             files must start with "T2star_S".  Segmentation MAT file
@@ -23,7 +24,7 @@
 %             3.  M-file exp_fun1.m, cmprt_ana4m.m and cmprt_plt4m.m
 %             must be in the current directory or path.
 %
-%     22-Jul-2022 * Mack Gardner-Morse
+%     06-Oct-2023 * Mack Gardner-Morse
 %
 
 %#######################################################################
@@ -76,14 +77,14 @@ mxts = 55;              % Maximum scale on T2* plots
 % Output Directory, Output Files and Output Labels
 %
 resdir = fullfile('Results');          % Results directory
-xlsnam1 = 'mri_me_fit_';               % Results spreadsheet
+xlsnam1 = 'mri_me_fit65_';             % Results spreadsheet
 xlsnam1 = fullfile(resdir,xlsnam1);    % Include output directory
 xlstyp = '.xlsx';       % Spreadsheet file extension
 hdrs1 = {'Subject' 'Result' 'Leg' 'Comprt' 'AP'};
 hdrs2 = {'Pixels' 'T1R/T2S' 'RSS' 'ValidPix' 'Mean' 'Min' 'Max' ...
          'SD' 'COV'};
 %
-psnam = fullfile(resdir,'mri_me_fit_'); % Start of PS file name
+psnam = fullfile(resdir,'mri_me_fit_');     % Start of PS file name
 pstyp = '.ps';          % PS file type
 %
 % Get Subject Directories
@@ -137,7 +138,8 @@ for ke = 1:3
 %
 % Loop through Subjects
 %
-   for ks = 1:nsubj
+%    for ks = 1:nsubj
+   for ks = nsubj
 %
 % Get Subject Directory, Name and Number
 %
@@ -163,7 +165,7 @@ for ke = 1:3
       nroi = size(roinams,1);
 %
       if nrho~=nroi
-        error([' *** ERROR in mri_me_fit:  Number of T1rho MAT', ...
+        error([' *** ERROR in mri_me_fit65:  Number of T1rho MAT', ...
                ' files not equal to number of ROI MAT files!']);
       end
 %
@@ -186,7 +188,7 @@ for ke = 1:3
 %
          idm = contains(rhonams,roinam(1:end-10));    % Get matching file
          if ~any(idm)
-           error([' *** ERROR in mri_me_fit:  Matching T1rho MAT', ...
+           error([' *** ERROR in mri_me_fit65:  Matching T1rho MAT', ...
                   ' file not found for ROI MAT file:  ' roinam '!']);
          end
          rhonam = rhonams{idm};
@@ -374,7 +376,7 @@ for ke = 1:3
       nroi = size(roinams,1);
 %
       if nstar~=nroi
-        error([' *** ERROR in mri_me_fit:  Number of T2* MAT', ...
+        error([' *** ERROR in mri_me_fit65:  Number of T2* MAT', ...
                ' files not equal to number of ROI MAT files!']);
       end
 %
@@ -397,7 +399,7 @@ for ke = 1:3
 %
          idm = contains(starnams,roinam(1:end-10));   % Get matching file
          if ~any(idm)
-           error([' *** ERROR in mri_me_fit:  Matching T2* MAT', ...
+           error([' *** ERROR in mri_me_fit65:  Matching T2* MAT', ...
                   ' file not found for ROI MAT file:  ' roinam '!']);
          end
          starnam = starnams{idm};
@@ -569,7 +571,7 @@ for ke = 1:3
 %
 % Save to MAT File
 %
-   matnam = fullfile(resdir,['mri_me_fit_' atyp '.mat']);
+   matnam = fullfile(resdir,['mri_me_fit65_' atyp '.mat']);
    save(matnam,'t1r_res','t1r_npx','t1r_rss','t1r_respx', ...
         't1r_rsspx','t1r_nps','t2s_res','t2s_npx','t2s_rss', ...
         't2s_respx','t2s_rsspx','t2s_nps');

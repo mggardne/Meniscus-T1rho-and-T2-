@@ -62,7 +62,8 @@ nsubj = size(sdirs,1);
 %
 % Loop through Subjects
 %
-for ks = 1:nsubj
+% for ks = 1:nsubj
+for ks = nsubj
 %
 % Get Subject Directory, Name and Number
 %
@@ -250,9 +251,11 @@ for ks = 1:nsubj
 %
 % Get Compartment Identifier for Slices
 %
-      idl = sum(icmprt,2)<0;           % Index to lateral compartment slices
+      idl = sum(icmprt,2)<0;           % Index to lateral slices
       rsll = rsl(idl);                 % Lateral compartment slices
+      nl = size(rsll,1);               % Number of lateral slices
       rslm = rsl(~idl);                % Medial compartment slices
+      nm = size(rslm,1);               % Number of medial slices
 %
 % Get Compartment and AP Specific Masks
 %
@@ -261,15 +264,31 @@ for ks = 1:nsubj
 %
       idapl = sum(iap(idl,:));
       idal = idapl<0;                  % Column index to anterior lateral masks
+      if any(idal)
+        maskmal = maskml(:,:,idal);    % Anterior lateral mask
+      else
+        maskmal = false(npxt,nl);      % Anterior lateral mask
+      end
       idpl = idapl>0;                  % Column index to posterior lateral masks
-      maskmal = maskml(:,:,idal);      % Anterior lateral mask
-      maskmpl = maskml(:,:,idpl);      % Posterior lateral mask
+      if any(idpl)
+        maskmpl = maskml(:,:,idpl);    % Posterior lateral mask
+      else
+        maskmpl = false(npxt,nl);      % Posterior lateral mask
+      end
 %
       idapm = sum(iap(~idl,:));
       idam = idapm<0;                  % Column index to anterior medial masks
+      if any(idam)
+        maskmam = maskmm(:,:,idam);    % Anterior medial mask
+      else
+        maskmam = false(npxt,nm);      % Anterior medial mask
+      end
       idpm = idapm>0;                  % Column index to posterior medial masks
-      maskmam = maskmm(:,:,idam);      % Anterior medial mask
-      maskmpm = maskmm(:,:,idpm);      % Posterior medial mask
+      if any(idpm)
+        maskmpm = maskmm(:,:,idpm);    % Posterior medial mask
+      else
+        maskmpm = false(npxt,nm);      % Posterior medial mask
+      end
 %
 % Get Compartment and AP Specific Meniscus Coordinates
 %
@@ -473,9 +492,11 @@ for ks = 1:nsubj
 %
 % Get Compartment Identifier for Slices
 %
-      idl = sum(icmprt,2)<0;           % Index to lateral compartment slices
+      idl = sum(icmprt,2)<0;           % Index to lateral slices
       rsll = rsl(idl);                 % Lateral compartment slices
+      nl = size(rsll,1);               % Number of lateral slices
       rslm = rsl(~idl);                % Medial compartment slices
+      nm = size(rslm,1);               % Number of medial slices
 %
 % Get Compartment and AP Specific Masks
 %
@@ -484,15 +505,31 @@ for ks = 1:nsubj
 %
       idapl = sum(iap(idl,:));
       idal = idapl<0;                  % Column index to anterior lateral masks
+      if any(idal)
+        maskmal = maskml(:,:,idal);    % Anterior lateral mask
+      else
+        maskmal = false(npxt,nl);      % Anterior lateral mask
+      end
       idpl = idapl>0;                  % Column index to posterior lateral masks
-      maskmal = maskml(:,:,idal);      % Anterior lateral mask
-      maskmpl = maskml(:,:,idpl);      % Posterior lateral mask
+      if any(idpl)
+        maskmpl = maskml(:,:,idpl);    % Posterior lateral mask
+      else
+        maskmpl = false(npxt,nl);      % Posterior lateral mask
+      end
 %
       idapm = sum(iap(~idl,:));
       idam = idapm<0;                  % Column index to anterior medial masks
+      if any(idam)
+        maskmam = maskmm(:,:,idam);    % Anterior medial mask
+      else
+        maskmam = false(npxt,nm);      % Anterior medial mask
+      end
       idpm = idapm>0;                  % Column index to posterior medial masks
-      maskmam = maskmm(:,:,idam);      % Anterior medial mask
-      maskmpm = maskmm(:,:,idpm);      % Posterior medial mask
+      if any(idpm)
+        maskmpm = maskmm(:,:,idpm);    % Posterior medial mask
+      else
+        maskmpm = false(npxt,nm);      % Posterior medial mask
+      end
 %
 % Get Compartment and AP Specific Meniscus Coordinates
 %
