@@ -15,8 +15,8 @@ function mask = cr_maskm(xy,npx,iplt)
 %          the triangular mesh of the segmentation is plotted in two
 %          new figures.  These figures are closed after a pause.
 %
-%          NOTES:  1.  M-files in_tri2d.m, mk_tri_m.m must be in the
-%                  current directory or path.
+%          NOTES:  1.  M-files in_tri2d.m, and mk_tri_m.m must be in
+%                  the current directory or path.
 %
 %                  2.  For generating a mask of one meniscus
 %                  segmentation on an individual slice.

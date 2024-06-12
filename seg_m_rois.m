@@ -18,11 +18,9 @@
 %             3.  Proton density MAT files must start with "PD_S".  See
 %             rd_pd_dicom.m.
 %
-%             4.  M-files circ_plt.m, cr_mask2.m, cr_mask2f.m,
-%             fnd_bbox.m, lsect2.m, lsect2a.m, lsect3.m, lsect4.m,
-%             lsect5.m, midline.m,  mk2_tri_2d.m, mk2_tri_2df.m,
-%             rd_roi6.m and tri2d.m must be in the current directory or
-%             path.
+%             4.  M-files cr_maskm.m, fnd_bbox.m, in_tri2d.m,
+%             mk_tri_m.m, and rd_roi6.m must be in the current
+%             directory or path.
 %
 %     19-Jul-2022 * Mack Gardner-Morse
 %
