@@ -62,8 +62,7 @@ nsubj = size(sdirs,1);
 %
 % Loop through Subjects
 %
-% for ks = 1:nsubj
-for ks = nsubj
+for ks = 1:nsubj
 %
 % Get Subject Directory, Name and Number
 %
