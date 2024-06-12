@@ -49,11 +49,13 @@ fun = @exp_fun1;        % Exponential function
 % init = -1;              % Use weighted least squares for starting parameters
 % init = 0;               % Use linear least squares for starting parameters
 init = 1;               % Use fixed starting parameters
-tr0 = 65;               % Initial T1rho estimate in ms
+tr0 = 20;               % 21.45 ms - mean w/ 50 ms threshold
+% tr0 = 65;               % Initial T1rho estimate in ms
 % tr0 = 80;               % Initial T1rho estimate in ms
 trmx = 100;             % Maximum valid T1rho result
 trmn = 0;               % Minimum valid T1rho result
-ts0 = 35;               % Initial T2* estimate in ms
+ts0 = 12;               % 12.38 ms - mean w/ 50 ms threshold
+% ts0 = 35;               % Initial T2* estimate in ms
 tsmx = 100;             % Maximum valid T2* result
 tsmn = 0;               % Minimum valid T2* result
 %

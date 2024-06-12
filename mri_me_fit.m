@@ -9,8 +9,8 @@
 %     using a cross, and square structural elements.  These masks are
 %     used to get T1rho and T2* over the smaller areas.  Resulting
 %     T1rho and T2* values and summary statistics are written to the
-%     MS-Excel spreadsheets, mri_me_fit_no.xlsx, mri_me_fit_ec.xlsx,
-%     and mri_me_fit_es.xlsx, in the "Results" directory.
+%     MS-Excel spreadsheets, mri_me_fit_no.xlsx, mri_me_fit_ec.xlsx, and
+%     mri_mes_fit_es.xlsx, in the "Results" directory.
 %
 %     NOTES:  1.  Data MAT files must be in subject directories 
 %             "..\PTOA\0*" where "*" is the subject number.
