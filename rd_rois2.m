@@ -1,4 +1,4 @@
-function bones = rd_rois(rdir,leg,ld,itroch,irho)
+function bones = rd_rois2(rdir,leg,ld,itroch,irho)
 %RD_ROIS   Reads a particular loaded or unloaded leg sagittal
 %          segmentation for the femur and tibia in pixels from CSV
 %          files in a directory.
